@@ -20,7 +20,7 @@ namespace VRD.Input
 
         public virtual InputAction Trigger
         {
-            get => trigger.action;
+            get => trigger.action; 
         }
 
         public virtual InputAction TriggerPressed

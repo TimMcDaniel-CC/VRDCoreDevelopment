@@ -6,16 +6,11 @@ public class BodyPresence : MonoBehaviour
     protected SphereCollider head;
     [SerializeField]
     protected CapsuleCollider body;
-    [SerializeField]
-    protected float headClearanceThreshold = 0.04f;
 
     public float BodyHeight
     {
         get => body.height;
     }
-    
-
-
     protected virtual void FixedUpdate()
     {
         AlignHeadToCamera();
@@ -43,5 +38,4 @@ public class BodyPresence : MonoBehaviour
 
         body.center = new Vector3(0f, body.height * 0.5f, 0f);
     }
-
 }

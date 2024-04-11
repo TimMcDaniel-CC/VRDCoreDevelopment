@@ -11,10 +11,6 @@ public class BodyBridge : MonoBehaviour
 
     private void Update()
     {
-        raycaster.BodyHeight = bodyPresence.BodyHeight;
-        if(raycaster.LeftSideHit)
-        {
-            var info = raycaster.LeftSideHitInfo;
-        }
+        raycaster.BodyHeight = bodyPresence.BodyHeight;        
     }
 }

@@ -1,43 +1,38 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Cochise.VRD
 {
-    public class SnapTurn : MonoBehaviour
+    public class SnapTurn : ContinuousTurn
     {
-        [SerializeField]
-        private InputActionProperty inputAction;
-        [SerializeField]
-        private Transform playerRig;
-        private float rotationAngle = 45f;
         private bool canTurn = true;
 
-
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            inputAction.action.performed += ApplyRotation;
+            base.OnEnable();
             inputAction.action.canceled += EnableTurn;
         }
-        private void OnDisable()
-        {
-            inputAction.action.performed -= ApplyRotation;
+        protected override void OnDisable() 
+        { 
+            base.OnDisable();
             inputAction.action.canceled -= EnableTurn;
         }
+
         private void EnableTurn(InputAction.CallbackContext context)
         {
             canTurn = true;
         }
-        private void ApplyRotation(InputAction.CallbackContext context)
+
+        protected override void ApplyRotation(InputAction.CallbackContext context)
         {
-            if (!canTurn)
+            if (canTurn)
             {
-                return;
+                canTurn = false;
+                base.ApplyRotation(context);
             }
-            canTurn = false;
-            float yRot = context.ReadValue<Vector2>().x > 0 ? rotationAngle : -rotationAngle;
-            playerRig.transform.RotateAround(Camera.main.transform.position, transform.up, yRot);
         }
-
-
     }
 }
